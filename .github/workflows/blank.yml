@@ -20,7 +20,7 @@ jobs:
         with:
           payload: |
             {
-              "text":"hello @nikhilkumar435@gmail.com",
+              "text":"hello nikhilkumar435@gmail.com",
               "emoji": ":redsiren:",
               "status": "FAILED",
               "environment": "${{ github.event.inputs.environment }}",
