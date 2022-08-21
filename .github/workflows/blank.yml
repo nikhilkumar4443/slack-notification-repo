@@ -20,7 +20,7 @@ jobs:
         with:
           payload: |
             {
-              "text":"hello ${{ github.actor }} @nikhilkumar435@gmail.com",
+              "text":"hello ${{ github.actor }} <@nikhilkumar435@gmail.com> <@U03TFF058KY>",
               "username": "nikhilkumar435@gmail.com"
             }
                   
