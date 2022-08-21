@@ -9,6 +9,6 @@ jobs:
       id: slack
       uses: slackapi/slack-github-action@v1.21.0
       with:
-        slack-message: "No Deployment"
+        payload: '{ "text": ":tada: Deployed to Prod :tada:" }'
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
