@@ -9,6 +9,6 @@ jobs:
       id: slack
       uses: slackapi/slack-github-action@v1.21.0
       with:
-        payload: '{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Se realizó el despliegue del front-end en el ambiente de *${{ inputs.env-name }}*"}},{"type":"section","text":{"type":"mrkdwn","text":"${{ inputs.url }}"}}]}'
+        slack-message: "No Deployment"
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
