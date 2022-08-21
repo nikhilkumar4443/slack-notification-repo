@@ -5,7 +5,6 @@ jobs:
     name: Slack Notification
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
     - name: Send GitHub Action trigger data to Slack workflow
       id: slack
       uses: slackapi/slack-github-action@v1.21.0
