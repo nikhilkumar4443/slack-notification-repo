@@ -1,5 +1,12 @@
-on: [push]
-
+on: 
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Test scenario tags'
 jobs:
   new_push_job:
     runs-on: ubuntu-latest
@@ -10,5 +17,5 @@ jobs:
         uses: slackapi/slack-github-action@v1.21.0
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-        
+                  
 
