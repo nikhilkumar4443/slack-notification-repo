@@ -9,7 +9,10 @@ jobs:
         id: slack-cs
         uses: slackapi/slack-github-action@v1.21.0
         env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_WEBHOOK_TOKEN }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_WEBHOOK }}
         with:
-          slack-message: "Maintenance is started"
-          channel-id: 'C03UBQ8G1KJ'
+          payload: |
+            {
+            "emoji": ":redsiren:",
+            "status": "FAILED"
+            }
