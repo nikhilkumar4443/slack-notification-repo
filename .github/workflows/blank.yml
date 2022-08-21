@@ -12,3 +12,4 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_WEBHOOK }}
         with:
           slack-message: "Maintenance is started"
+          channel-id: 'C03UBQ8G1KJ'
