@@ -13,6 +13,12 @@ jobs:
         with:
           payload: |
             {
-            "emoji": ":redsiren:",
-            "status": "FAILED"
+              "emoji": ":redsiren:",
+              "status": "FAILED",
+              "environment": "${{ github.event.inputs.environment }}",
+              "repository": "${{ github.repository }}",
+              "ref_name": "${{ github.ref_name }}",
+              "actor": "${{ github.actor }}",
+              "runlink": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             }
+
