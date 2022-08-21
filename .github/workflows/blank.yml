@@ -9,7 +9,7 @@ jobs:
         id: slack-cs
         uses: slackapi/slack-github-action@v1.21.0
         env:
-          SLACK_TOKEN: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_WEB_URL: ${{ secrets.SLACK_WEBHOOK }}
         with:
           payload: |
             {
