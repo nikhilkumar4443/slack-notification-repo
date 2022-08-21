@@ -13,6 +13,7 @@ jobs:
         with:
           payload: |
             {
+              "text":"hello",
               "emoji": ":redsiren:",
               "status": "FAILED",
               "environment": "${{ github.event.inputs.environment }}",
