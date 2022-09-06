@@ -2,7 +2,7 @@
 on: 
   workflow_dispatch:
     inputs:
-      env:
+      environment:
         default: 'dev'
       version:
         default: 'latest'
