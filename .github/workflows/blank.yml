@@ -1,5 +1,9 @@
 on: push
 
+permissions:
+  contents: write
+  actions: write
+  pull-requests: write
 jobs:      
   new_push_job:
     runs-on: ubuntu-latest
