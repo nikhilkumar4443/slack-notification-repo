@@ -12,9 +12,16 @@ jobs:
       - name: send dispatch to deploy workflow
         id: dispatch_deploy_event
         run: |
-          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -X POST \
-              -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/linganikhilkumar/slack-notification-repo/actions/workflows/test.yml/dispatches \
-              -d '{ "ref": "main", "inputs": { "environment": "dev", "version": "latest" }  }'
+          curl --location --request POST 'https://api.github.com/repos/linganikhilkumar/slack-notification-repo/actions/workflows/test.yml/dispatches' \
+          --header 'Authorization: token ${{ secrets.GIT }}' \
+          --header 'Content-Type: application/json' \
+          --data-raw '{
+              "ref": "main",
+              "inputs": {
+                  "environment": "dev",
+                  "version": "latest"
+              }
+          }'
 
       - name: notify CS
         id: slack-cs
