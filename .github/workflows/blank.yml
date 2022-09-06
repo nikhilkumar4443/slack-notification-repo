@@ -1,12 +1,5 @@
-on: 
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'     
-        required: true
-        default: 'warning'
-      tags:
-        description: 'Test scenario tags'
+on: push
+
 jobs:
   wait_till_approve: 
    runs-on: ubuntu-latest
