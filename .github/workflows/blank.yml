@@ -13,7 +13,7 @@ jobs:
         id: dispatch_deploy_event
         run: |
           curl --location --request POST 'https://api.github.com/repos/linganikhilkumar/slack-notification-repo/actions/workflows/test.yml/dispatches' \
-          --header 'Authorization: token ${{ secrets.GIT_TOKEN }}' \
+          --header 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' \
           --header 'Content-Type: application/json' \
           --data-raw '{
               "ref": "main",
