@@ -19,6 +19,13 @@ jobs:
     runs-on: ubuntu-latest
     name: New push to repo
     steps:
+      - name: send dispatch to deploy workflow
+        id: dispatch_deploy_event
+        run: |
+          curl -u ":${{ secrets.GITHUB_TOKEN }}" -X POST \
+              -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/linganikhilkumar/slack-notification-repo/actions/workflows/test.yml/dispatches \
+              -d '{ "ref": "dev", "inputs": { "environment": "dev", "version": "${{needs.set_variables.outputs.build_version}}" }  }'
+
       - name: notify CS
         id: slack-cs
         uses: slackapi/slack-github-action@v1.21.0
