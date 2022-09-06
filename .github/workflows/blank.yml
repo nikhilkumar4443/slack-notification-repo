@@ -4,6 +4,7 @@ permissions:
   contents: write
   actions: write
   pull-requests: write
+  
 jobs:      
   new_push_job:
     runs-on: ubuntu-latest
@@ -12,7 +13,7 @@ jobs:
       - name: send dispatch to deploy workflow
         id: dispatch_deploy_event
         run: |
-          curl --location --request POST 'https://api.github.com/repos/linganikhilkumar/slack-notification-repo/actions/workflows/test.yml/dispatches' \
+          curl -I --location --request POST 'https://api.github.com/repos/linganikhilkumar/slack-notification-repo/actions/workflows/test.yml/dispatches' \
           --header 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' \
           --header 'Content-Type: application/json' \
           --data-raw '{
