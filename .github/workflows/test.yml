@@ -8,10 +8,12 @@ on:
         default: 'latest'
 jobs:      
   new_push_job:
+    environment: dev
     runs-on: ubuntu-latest
     name: New push to repo
     steps:
       - name: notify CS
+        
         id: slack-cs
         uses: slackapi/slack-github-action@v1.21.0
         env:
