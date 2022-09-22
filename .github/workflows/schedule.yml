@@ -19,6 +19,6 @@ jobs:
         last_status=$(curl --silent --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
                                     --header 'content-type: application/json' \
         "${{ github.api_url }}/repos/${{ github.repository }}/actions/runs?per_page=5&status=waiting" \
-        | jq -r .workflow_runs[*].status)
+        | jq -r .workflow_runs[].status )
         echo "::set-output name=last_status::$last_status"
         echo "Status of the previous build: $last_status"
