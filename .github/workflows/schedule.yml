@@ -2,7 +2,12 @@ name: CheckPendingWorkflows
 on:
   schedule:
     - cron: "*/5 5 * * *"
-
+  workflow_dispatch:
+    inputs:
+      environment:
+        default: 'dev'
+      version:
+        default: 'latest'
 jobs:
   stale:
     runs-on: ubuntu-latest
