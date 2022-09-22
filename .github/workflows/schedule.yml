@@ -7,8 +7,13 @@ jobs:
   stale:
     runs-on: ubuntu-latest
     steps:   
-    - uses: actions/stale@v1.1.0
-      with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        stale-issue-message: 'Message to comment on stale issues. If none provided, will not mark issues stale'
-        stale-pr-message: 'Message to comment on stale PRs. If none provided, will not mark PRs stale'
+    - name: Get previous build status
+      shell: bash
+      id: last_status
+      run: |
+        last_status=$(curl --silent --header 'authorization: Bearer ${{ env.github_token }}' \
+                                    --header 'content-type: application/json' \
+        "${{ github.api_url }}/repos/${{ github.repository }}/actions/workflows/${{ env.WORKFLOW_ID }}/runs?per_page=1&status=completed&branch=${{ env.BRANCH_NAME }}" \
+        | jq -r .workflow_runs[0].conclusion)
+        echo "::set-output name=last_status::$last_status"
+        echo "Status of the previous build: $last_status"
