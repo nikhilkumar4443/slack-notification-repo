@@ -1,5 +1,10 @@
-on: push
-
+on: 
+  workflow_dispatch:
+    inputs:
+      environment:
+        default: 'dev'
+      version:
+        default: 'latest'
 permissions: write-all
   
 jobs:      
