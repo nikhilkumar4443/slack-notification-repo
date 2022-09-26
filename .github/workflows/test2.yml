@@ -64,6 +64,7 @@ jobs:
             
   try_for_pending:
     needs: set_variables
+    if: jobs.deploy_environment.env.WORKFLOW_STATUS == 'pending'
     runs-on: ubuntu-latest
     steps:
       - run: echo $WORKFLOW_STATUS
