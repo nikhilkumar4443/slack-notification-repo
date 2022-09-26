@@ -1,0 +1,80 @@
+name: Deploy KIS Infra for environment
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Which environment should be deployed?
+        required: true
+        type: environment
+        default: dev
+      version:
+        description: "Which version should be deployed? You can use `latest` to grab the latest version of the main branch, or supply a tag with SHA (e.g. `v1.0.0-1234567`)"
+        required: true
+        default: latest
+      stack:
+        description: "The stack to deploy (e.g. `kis-dev-s3`), defaults to all stacks (`*`)"
+        required: true
+        default: "*"
+
+env:
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_DEPLOY_URL_TEST }}
+
+
+jobs:
+  set_variables:
+    outputs:
+      build_status: "success"
+    runs-on: ubuntu-latest
+    steps:
+      - name: output deploy env
+        run: |
+          echo ":pray: CDK deploy for ${{ github.event.inputs.environment }} starting" >> $GITHUB_STEP_SUMMARY
+          echo "-----"
+
+
+
+  # Send a slack notification for UAT/Prod deployments
+  deploy_approval_alert:
+    needs: set_variables
+    if: needs.set_variables.outputs.build_status == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Slack Deployment Notification
+        id: slack-deploy-start
+        run: |
+          echo ":pray: Sending deploy approval start notification" >> $GITHUB_STEP_SUMMARY
+          echo "-----"
+
+  deploy_environment:
+    needs: set_variables
+    if: needs.set_variables.outputs.build_status == 'success' # Run deploy stack only when build status is success
+    environment: dev
+    runs-on: ubuntu-latest
+    steps:
+      - uses: technote-space/workflow-conclusion-action@v3
+      - name: Send Slack Deployment Notification
+        id: slack-deploy-start
+        run: |
+          echo ":pray: Sending deploy start notification" >> $GITHUB_STEP_SUMMARY
+          echo "-----"
+        
+            
+  try_for_pending:
+    needs: set_variables
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo $WORKFLOW_STATUS
+      - run: sleep 30
+        shell: bash
+      - run: echo $WORKFLOW_STATUS
+      
+      - name: Send Slack Penign Approval Notification
+        if: env.WORKFLOW_STATUS == 'pending'
+        id: slack-deploy-approval-pending
+        run: |
+          echo ":pray: Sending  notification as its still waiting for approval" >> $GITHUB_STEP_SUMMARY
+          echo "-----"
+  
