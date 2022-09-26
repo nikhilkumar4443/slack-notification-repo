@@ -53,6 +53,8 @@ jobs:
     if: needs.set_variables.outputs.build_status == 'success' # Run deploy stack only when build status is success
     environment: dev
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ env.WORKFLOW_STATUS }}
     steps:
       - uses: technote-space/workflow-conclusion-action@v3
       - name: Send Slack Deployment Notification
@@ -64,7 +66,7 @@ jobs:
             
   try_for_pending:
     needs: set_variables
-    if: jobs.deploy_environment.env.WORKFLOW_STATUS == 'pending'
+    if: jobs.deploy_environment.env.output1 == 'pending'
     runs-on: ubuntu-latest
     steps:
       - run: echo $WORKFLOW_STATUS
