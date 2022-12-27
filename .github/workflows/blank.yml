@@ -7,35 +7,15 @@ on:
         default: 'latest'
 permissions: write-all
   
-jobs:      
+jobs: 
+
   new_push_job:
     runs-on: ubuntu-latest
     name: New push to repo
     steps:
-      - name: send dispatch to deploy workflow
-        id: dispatch_deploy_event
-        run: |
-          curl --location --request POST 'https://api.github.com/repos/linganikhilkumar/slack-notification-repo/actions/workflows/test.yml/dispatches' \
-          --header 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' \
-          --header 'Content-Type: application/json' \
-          --data-raw '{
-              "ref": "main",
-              "inputs": {
-                  "environment": "dev",
-                  "version": "latest"
-              }
-          }'
-
-      - name: notify CS
-        id: slack-cs
-        uses: slackapi/slack-github-action@v1.21.0
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-        with:
-          payload: |
-            {
-              "text":"hello ${{ github.actor }} <@nikhilkumar435@gmail.com> <@U03TFF058KY>",
-              "username": "nikhilkumar435@gmail.com"
-            }
-                  
-
+     - name: Configure AWS Credentials
+       uses: aws-actions/configure-aws-credentials@v1
+       with:
+          aws-region: us-east-2
+          role-to-assume: arn:aws:iam::336607023349:role/oidc-Role-14985HCQ88QRR
+          role-session-name: MySessionName
