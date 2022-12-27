@@ -19,3 +19,5 @@ jobs:
           aws-region: us-east-2
           role-to-assume: arn:aws:iam::336607023349:role/oidc-Role-14985HCQ88QRR
           role-session-name: MySessionName
+     - name: run s3 ls
+       run: aws s3 ls
