@@ -1,5 +1,6 @@
 on: push
-  
+
+permissions: write-all
 jobs: 
   new_push_job:
     runs-on: ubuntu-latest
