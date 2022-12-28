@@ -1,14 +1,6 @@
-on: 
-  workflow_dispatch:
-    inputs:
-      environment:
-        default: 'dev'
-      version:
-        default: 'latest'
-permissions: write-all
+on: push
   
 jobs: 
-
   new_push_job:
     runs-on: ubuntu-latest
     name: New push to repo
@@ -20,4 +12,4 @@ jobs:
           role-to-assume: arn:aws:iam::336607023349:role/oidc-Role-14985HCQ88QRR
           role-session-name: MySessionName
      - name: run s3 ls
-       run: aws s3 ls
+       run: echo ${{ github.event }}
