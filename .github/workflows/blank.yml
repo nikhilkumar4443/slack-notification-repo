@@ -5,11 +5,11 @@ jobs:
     runs-on: ubuntu-latest
     name: New push to repo
     steps:
-     - name: Configure AWS Credentials
-       uses: aws-actions/configure-aws-credentials@v1
-       with:
-          aws-region: us-east-2
-          role-to-assume: arn:aws:iam::336607023349:role/oidc-Role-14985HCQ88QRR
-          role-session-name: MySessionName
+     #- name: Configure AWS Credentials
+     #  uses: aws-actions/configure-aws-credentials@v1
+     #  with:
+     #     aws-region: us-east-2
+     #     role-to-assume: arn:aws:iam::336607023349:role/oidc-Role-14985HCQ88QRR
+     #     role-session-name: MySessionName
      - name: run s3 ls
        run: echo ${{ github.event }}
