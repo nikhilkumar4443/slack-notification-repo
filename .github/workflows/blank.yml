@@ -29,4 +29,4 @@ jobs:
         echo ${{ github.event.head_commit.message }}
         echo ${{ github.ref_name }}
      - name: run pipeline
-       run: python test.py -c ${{ github.event.head_commit.message }} -b echo ${{ github.ref_name }}
+       run: python test.py -c "${{ github.event.head_commit.message }}" -b "${{ github.ref_name }}"
