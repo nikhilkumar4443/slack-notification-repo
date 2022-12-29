@@ -4,7 +4,7 @@ permissions: write-all
 jobs: 
   run_deployment:
     runs-on: ubuntu-latest
-    if: github.event.head_commit.message has "deploy"
+    if: contains( ${{ github.event.head_commit.message }}, "deploy")
 
     name: Run deployment codepipeline 
     steps:
