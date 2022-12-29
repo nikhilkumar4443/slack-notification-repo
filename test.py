@@ -2,7 +2,6 @@
 import boto3
 import argparse
 
-
 def main(commit_message, branch):
     if "deploy" in commit_message:
       info = commit_message.split(":")[1]
