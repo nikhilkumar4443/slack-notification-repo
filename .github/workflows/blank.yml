@@ -2,16 +2,24 @@ on: push
 
 permissions: write-all
 jobs: 
-  new_push_job:
+  run_deployment:
     runs-on: ubuntu-latest
-    name: New push to repo
+    name: Run deployment codepipeline 
     steps:
+     - name: Checkout
+       uses: actions/checkout@v2
+       
+     - name: Setup python
+       uses: actions/setup-python@v2
+       with: 
+          python-version: 3.8.2    
+ 
      - name: Configure AWS Credentials
        uses: aws-actions/configure-aws-credentials@v1
        with:
           aws-region: us-east-2
           role-to-assume: arn:aws:iam::336607023349:role/oidc-Role-14985HCQ88QRR
-          role-session-name: MySessionName
+          role-session-name: TempSession
      - name: run s3 ls
        run: |
         echo ${{ github.event.head_commit.message }}
